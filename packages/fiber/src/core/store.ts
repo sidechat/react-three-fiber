@@ -99,6 +99,7 @@ export type ComputeOffsetsFunction = (event: any, state: RootState) => { offsetX
 
 export type StoreProps = {
   gl: THREE.WebGLRenderer
+  scene: THREE.scene
   size: Size
   vr?: boolean
   shadows?: boolean | Partial<THREE.WebGLShadowMap>
@@ -137,6 +138,7 @@ const createStore = (
 ): UseStore<RootState> => {
   const {
     gl,
+    scene,
     size,
     shadows = false,
     linear = false,
@@ -230,7 +232,7 @@ const createStore = (
 
       linear,
       flat,
-      scene: prepare<THREE.Scene>(new THREE.Scene()),
+      scene: prepare<THREE.Scene>(scene || new THREE.Scene()),
       camera,
       raycaster,
       clock,
